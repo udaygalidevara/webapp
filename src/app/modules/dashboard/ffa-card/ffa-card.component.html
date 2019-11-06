@@ -1,0 +1,54 @@
+<div class="ffa-cntr">
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>Fault Frequency Analysis</mat-card-title>
+			<mat-card-subtitle>
+				<div>
+					<form [formGroup]="formGroup">
+						<div class="row">
+							<div class="col-12 col-sm-3 col-md-3">
+								<mat-form-field>
+									<input matInput type="number" formControlName="from" placeholder="From (Hz)">
+									<mat-error *ngIf="f.from.hasError('required')">Required</mat-error>
+								</mat-form-field>
+							</div>
+							<div class="col-12 col-sm-3 col-md-3">
+								<mat-form-field>
+									<input matInput type="number" formControlName="to" placeholder="To (Hz)">
+									<mat-error *ngIf="f.to.hasError('required')">Required</mat-error>
+								</mat-form-field>
+							</div>
+							<div class="col-12 col-sm-3 col-md-3">
+								<button mat-button (click)="loadAvgFreq()" color="primary"
+								        [disabled]="formGroup.invalid">Load Data
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<ng-container *ngIf="config; else noData">
+				<ng-container *ngIf="!showSpinner || (normalData || abnormalData); else spinner">
+					<ng-container *ngIf="normalData || abnormalData; else noData">
+						<div class="chart">
+							<app-freq-chart [normalData]="normalData"
+							                [abnormalData]="abnormalData"></app-freq-chart>
+						</div>
+					</ng-container>
+				</ng-container>
+				<ng-template #spinner>
+					<div class="h-100 w-100" fxLayoutAlign="center center">
+						<mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+					</div>
+				</ng-template>
+			</ng-container>
+			<ng-template #noData>
+				<div class="no-data">
+					<span class="mat-body c54">No data available. Please select machine and starting time.</span>
+				</div>
+			</ng-template>
+		</mat-card-content>
+	</mat-card>
+</div>

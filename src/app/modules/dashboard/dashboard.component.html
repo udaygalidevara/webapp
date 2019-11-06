@@ -1,0 +1,24 @@
+<div class="row">
+	<div class="col-12 mb-24">
+		<app-select-machine (config)="config=$event"
+		                    [machines]="machines"></app-select-machine>
+	</div>
+
+	<ng-container *ngIf="machines">
+		<div class="col-12 mb-24">
+			<app-dfft-card [config]="config"></app-dfft-card>
+		</div>
+
+		<div class="col-12 mb-24">
+			<app-irms-card [config]="config"></app-irms-card>
+		</div>
+
+		<div class="col-12 mb-24">
+			<app-ffa-card [config]="config"></app-ffa-card>
+		</div>
+
+		<div *ngIf="config" class="col-12 col-sm-6 mb-24">
+			<app-tagging [config]="config"></app-tagging>
+		</div>
+	</ng-container>
+</div>

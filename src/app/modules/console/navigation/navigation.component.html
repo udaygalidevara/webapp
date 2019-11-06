@@ -1,0 +1,9 @@
+<div class="nv-cntr h-100" fxLayout="column">
+	<div class="lg-cntr" fxLayoutAlign="center center">
+		<img alt="minto.ai" class="logo" src="../../../../assets/img/logo.png">
+	</div>
+	<div class="nv-content" fxFlex="grow">
+		<app-nav-item *ngFor="let node of navTree" [activePath]="activePath"
+		              [node]="node"></app-nav-item>
+	</div>
+</div>

@@ -1,0 +1,54 @@
+<div class="dfft-cntr">
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>DFFT</mat-card-title>
+			<ng-container *ngIf="config">
+				<div class="spacer"></div>
+				<div>
+					<mat-form-field *ngIf="!custFreqEnabled; else custom;">
+						<mat-select (valueChange)="setFaultFrequency($event)"
+						            placeholder="Select moving part"
+						            [disabled]="!normalFreq && !abnormalFreq">
+							<mat-option *ngFor="let pair of machineFaultPair"
+							            [value]="pair">{{pair.fault.fault_name}}&nbsp;|&nbsp;{{pair.machine.name}}</mat-option>
+							<mat-option (click)="custFreqEnabled = true;">Custom Frequency</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<ng-template #custom>
+						<div fxLayoutAlign="start baseline">
+							<mat-form-field>
+								<input matInput type="text" autofocus placeholder="Custom frequency"
+								       [(ngModel)]="customFreq">
+								<mat-icon matSuffix inline (click)="custFreqEnabled  = false;">close</mat-icon>
+								<mat-hint>Comma (,) separated frequencies</mat-hint>
+							</mat-form-field>
+							<button mat-button color="primary" (click)="setCustomFreq()">Load</button>
+						</div>
+					</ng-template>
+					<a *ngIf="selectedFault" class="mat-caption col-pr cur-p ml-16"
+					   (click)="selectedFault = null">Clear</a>
+				</div>
+			</ng-container>
+		</mat-card-header>
+		<mat-card-content>
+			<ng-container *ngIf="config; else noData">
+				<ng-container *ngIf="normalFreq || abnormalFreq; else spinner">
+					<div class="chart">
+						<app-dfft-chart [normalFreq]="normalFreq" [abnormalFreq]="abnormalFreq"
+						                [fault]="selectedFault"></app-dfft-chart>
+					</div>
+				</ng-container>
+				<ng-template #spinner>
+					<div class="h-100 w-100" fxLayoutAlign="center center">
+						<mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+					</div>
+				</ng-template>
+			</ng-container>
+			<ng-template #noData>
+				<div class="no-data">
+					<span class="mat-body c54">No data available. Please select machine and starting time.</span>
+				</div>
+			</ng-template>
+		</mat-card-content>
+	</mat-card>
+</div>

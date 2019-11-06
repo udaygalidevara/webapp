@@ -1,0 +1,76 @@
+<div class="w-100">
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>Select Machine</mat-card-title>
+		</mat-card-header>
+
+		<ng-container *ngIf="machines; else spinner">
+			<mat-card-content>
+				<form [formGroup]="formGroup">
+
+					<div class="row">
+						<!-- Normal -->
+						<div class="col-12 col-sm-6 col-md-3">
+							<mat-form-field>
+								<mat-select formControlName="normalMachine" placeholder="Normal Machine">
+									<mat-option *ngFor="let machine of machines"
+									            [value]="machine">{{machine.name}}</mat-option>
+								</mat-select>
+								<mat-error *ngIf="f.normalMachine.hasError('required')">
+									Normal machine and start time are required.
+								</mat-error>
+							</mat-form-field>
+						</div>
+						<div class="col-12 col-sm-6 col-md-3">
+							<mat-form-field>
+								<input (dateTimeInput)="syncTimestamp($event)" [max]="maxDateTime"
+								       [owlDateTime]="normalTS"
+								       formControlName="normalTS"
+								       placeholder="Select Time" matInput>
+								<mat-icon class="cur-p" [owlDateTimeTrigger]="normalTS" matSuffix inline>calendar_today
+								</mat-icon>
+								<owl-date-time #normalTS></owl-date-time>
+							</mat-form-field>
+						</div>
+
+						<!-- Abnormal -->
+						<div class="col-12 col-sm-6 col-md-3">
+							<mat-form-field>
+								<mat-select formControlName="abnormalMachine" placeholder="Abnormal Machine">
+									<mat-option *ngFor="let machine of machines"
+									            [value]="machine">{{machine.name}}</mat-option>
+								</mat-select>
+								<mat-error *ngIf="f.abnormalMachine.hasError('required')">
+									Normal machine and start time are required.
+								</mat-error>
+							</mat-form-field>
+						</div>
+						<div class="col-12 col-sm-6 col-md-3">
+							<mat-form-field>
+								<input (dateTimeInput)="syncTimestamp($event)" [max]="maxDateTime"
+								       [owlDateTime]="abnormalTS" formControlName="abnormalTS"
+								       placeholder="Select Time" matInput>
+								<mat-icon class="cur-p" [owlDateTimeTrigger]="abnormalTS" matSuffix inline>
+									calendar_today
+								</mat-icon>
+								<owl-date-time #abnormalTS></owl-date-time>
+							</mat-form-field>
+						</div>
+					</div>
+				</form>
+			</mat-card-content>
+
+			<mat-card-actions align="end">
+				<button mat-button (click)="formGroup.reset()">Reset</button>
+				<button (click)="loadData()" [disabled]="formGroup.invalid" cdkTrapFocus color="primary"
+				        mat-button>Load Data
+				</button>
+			</mat-card-actions>
+		</ng-container>
+		<ng-template #spinner>
+			<mat-card-content fxLayoutAlign="center center">
+				<mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+			</mat-card-content>
+		</ng-template>
+	</mat-card>
+</div>

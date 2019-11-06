@@ -1,0 +1,28 @@
+<div class="irms-cntr">
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>irms Data</mat-card-title>
+		</mat-card-header>
+
+		<mat-card-content>
+			<ng-container *ngIf="config; else noData">
+				<ng-container *ngIf="normalData || abnormalData; else spinner">
+					<div class="chart">
+						<app-irms-chart [normalData]="normalData"
+						                [abnormalData]="abnormalData"></app-irms-chart>
+					</div>
+				</ng-container>
+				<ng-template #spinner>
+					<div class="h-100 w-100" fxLayoutAlign="center center">
+						<mat-spinner diameter="50" strokeWidth="5"></mat-spinner>
+					</div>
+				</ng-template>
+			</ng-container>
+			<ng-template #noData>
+				<div class="no-data">
+					<span class="mat-body c54">No data available. Please select machine and starting time.</span>
+				</div>
+			</ng-template>
+		</mat-card-content>
+	</mat-card>
+</div>

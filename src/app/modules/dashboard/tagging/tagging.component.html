@@ -1,0 +1,43 @@
+<div class="w-100">
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>Tagging</mat-card-title>
+		</mat-card-header>
+
+		<mat-card-content>
+			<form [formGroup]="formGroup">
+				<div class="row">
+					<div class="col-12">
+						<mat-form-field>
+							<mat-select formControlName="faultType" placeholder="Fault Type">
+								<mat-option *ngFor="let pair of machineFaultPair"
+								            [value]="pair">{{pair.fault.fault_name}}&nbsp;|&nbsp;{{pair.machine.name}}</mat-option>
+							</mat-select>
+							<mat-error *ngIf="f.faultType.hasError('required')">Fault Type is required.</mat-error>
+						</mat-form-field>
+					</div>
+					<div class="col-12">
+						<mat-form-field>
+							<input [max]="maxDateTime" [owlDateTime]="faultRange" [selectMode]="'range'"
+							       formControlName="faultRange"
+							       placeholder="Select Time Range" matInput>
+							<mat-icon class="cup" [owlDateTimeTrigger]="faultRange" matSuffix inline>
+								calendar_today
+							</mat-icon>
+							<owl-date-time #faultRange></owl-date-time>
+							<mat-error *ngIf="f.faultRange.hasError('required')">Time range is required.</mat-error>
+						</mat-form-field>
+					</div>
+
+				</div>
+			</form>
+		</mat-card-content>
+
+		<mat-card-actions align="end">
+			<button mat-button (click)="formGroup.reset()">Reset</button>
+			<button (click)="submit()" [disabled]="formGroup.invalid" cdkTrapFocus color="primary"
+			        mat-button>Submit
+			</button>
+		</mat-card-actions>
+	</mat-card>
+</div>

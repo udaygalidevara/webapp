@@ -1,0 +1,44 @@
+<div class="w-100">
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>Login to Minto</mat-card-title>
+		</mat-card-header>
+		<mat-divider></mat-divider>
+		<mat-card-content class="pt-24">
+			<div *ngIf="errorMessage" class="lgn-err p-8 mb-16 bg-wa-lt col-wa" fxLayoutAlign="space-between center">
+				<span class="mat-body-1">{{errorMessage}}</span>
+				<mat-icon (click)="errorMessage = null" class="ml-16 cur-p" inline>close</mat-icon>
+			</div>
+			<form [formGroup]="loginFG" fxLayout="column">
+				<mat-form-field hintLabel="Enter username">
+					<mat-icon matPrefix inline class="mr-8">email</mat-icon>
+					<input formControlName="username" type="email" matInput placeholder="Username">
+					<mat-error *ngIf="f.username.hasError('required')">Username is required.</mat-error>
+					<mat-error *ngIf="!f.username.hasError('required') && f.username.hasError('email')">
+						Username is invalid
+					</mat-error>
+				</mat-form-field>
+				<mat-form-field hintLabel="Enter password">
+					<mat-icon matPrefix inline class="mr-8">vpn_key</mat-icon>
+					<input formControlName="password" [type]="showPassword ? 'text': 'password'"
+					       matInput placeholder="Password">
+					<mat-error *ngIf="f.password.hasError('required')">Password is required.</mat-error>
+					<mat-icon matSuffix (click)="showPassword = !showPassword" inline>
+						{{showPassword ? 'visibility_off' : 'visibility'}}
+					</mat-icon>
+				</mat-form-field>
+				<div class="mt-24" fxLayoutAlign="center">
+					<button mat-flat-button type="submit" color="primary"
+					        class="w-100" (click)="authenticUser()" [disabled]="loginFG.invalid">
+						<ng-container *ngIf="!showSpinner; else spinner">
+							<span>Login</span>
+						</ng-container>
+						<ng-template #spinner>
+							<mat-spinner diameter="25" strokeWidth="3" color="accent"></mat-spinner>
+						</ng-template>
+					</button>
+				</div>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>

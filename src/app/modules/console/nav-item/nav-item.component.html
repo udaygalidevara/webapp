@@ -1,0 +1,7 @@
+<div *ngIf="node" class="nv-cntr">
+	<a [class.active]="isActive" [routerLink]="node.path" class="mat-h4 nv-item w-100" fxLayoutAlign="start center">
+		<mat-icon class="mr-16">{{node.icon}}</mat-icon>
+		<span>{{node.name}}</span>
+		<span *ngIf="!node.path" class="ml-16 col-pr mat-caption">Coming soon</span>
+	</a>
+</div>

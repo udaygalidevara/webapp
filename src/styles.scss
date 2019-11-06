@@ -1,0 +1,169 @@
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+@import "colors";
+@import '~@angular/material/theming';
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+@include mat-core();
+
+$minto-app-primary: mat-palette($mat-indigo);
+$minto-app-accent: mat-palette($mat-pink, A200, A100, A400);
+$minto-app-warn: mat-palette($mat-red);
+$minto-app-theme: mat-light-theme($minto-app-primary, $minto-app-accent, $minto-app-warn);
+@include angular-material-theme($minto-app-theme);
+
+html {
+	font-size: 16px;
+}
+
+html, body {
+	height: 100%;
+}
+
+@font-face {
+	font-family: 'Proxima Nova';
+	src: url(/assets/fonts/ProximaNova/ProximaNova-Regular.otf) format('opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	margin: 0;
+	//font-family: Roboto, "Helvetica Neue", sans-serif;
+	font-family: 'Proxima Nova', Fallback, sans-serif;
+}
+
+button, a {
+	outline: unset !important;
+}
+
+a, a:hover, a:focus, a:visited {
+	color: unset;
+	text-decoration: none;
+}
+
+.h-100 {
+	height: 100%;
+}
+
+.w-100 {
+	width: 100%;
+}
+
+/* Margins */
+.m-24 {
+	margin: 1.5rem;
+}
+
+.ml-16 {
+	margin-left: 1rem;
+}
+
+.mb-16 {
+	margin-bottom: 1rem;
+}
+
+.mb-24 {
+	margin-bottom: 1.5rem;
+}
+
+.mr-16 {
+	margin-right: 1rem;
+}
+
+.mr-8 {
+	margin-right: 0.5rem;
+}
+
+.mt-24 {
+	margin-top: 1.5rem;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Paddings */
+.p-8 {
+	padding: 0.5rem;
+}
+
+.p-16 {
+	padding: 1rem;
+}
+
+.p-24 {
+	padding: 1.5rem;
+}
+
+.pt-24 {
+	padding-top: 1.5rem;
+}
+
+/* Backgrounds */
+.bg-pr {
+	background-color: $col-primary;
+}
+
+.bg-g1 {
+	background-color: $col-grey1;
+}
+
+.bg-wa-lt {
+	background-color: rgba($col-warn, 0.3);
+}
+
+/* Colors */
+.c54 {
+	color: rgba(black, 0.54);
+}
+
+.col-w-54 {
+	color: rgba(white, 0.54);
+}
+
+.col-w-87 {
+	color: rgba(white, 0.87);
+}
+
+.col-pr {
+	color: $col-primary;
+}
+
+.col-wa {
+	color: $col-warn;
+}
+
+/* Misc. */
+.cur-p {
+	cursor: pointer;
+}
+
+.spacer {
+	flex: 1 1 auto;
+}
+
+.no-data {
+	align-items: center;
+	display: flex;
+	height: 4rem;
+	justify-content: center;
+}
+
+.canvasjs-chart-credit {
+	display: none;
+}
+
+/* Material patches */
+.mat-h1, .mat-h2, .mat-h3, .mat-h4 {
+	margin-bottom: 0;
+}
+
+mat-form-field {
+	margin-bottom: 1rem;
+}
+
+.mat-card-header-text {
+	margin: 0 !important;
+}

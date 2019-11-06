@@ -1,0 +1,21 @@
+<mat-sidenav-container class="h-100 w-100">
+
+	<!-- Left Navigation -->
+	<mat-sidenav #appnav [mode]="mobileView ? 'over' : 'side'" [opened]="!mobileView">
+		<app-navigation></app-navigation>
+	</mat-sidenav>
+
+	<mat-sidenav-content>
+
+		<!-- App Toolbar -->
+		<app-toolbar (toggleNavbar)="appnav.toggle()"></app-toolbar>
+
+		<div class="p-24">
+
+			<router-outlet></router-outlet>
+
+		</div>
+
+	</mat-sidenav-content>
+
+</mat-sidenav-container>

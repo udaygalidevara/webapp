@@ -1,0 +1,13 @@
+<div class="tb-cntr">
+	<mat-toolbar class="mat-elevation-z1" fxLayoutAlign="start center">
+		<button (click)="toggleNavbar.emit()" mat-icon-button>
+			<mat-icon>menu</mat-icon>
+		</button>
+		<div class="spacer"></div>
+		<div *ngIf="userName" class="mr-16 mat-h4 col-pr">
+			<span class="d-none d-sm-inline">Welcome, &nbsp;</span>
+			<span><strong>{{userName}}</strong></span>
+		</div>
+		<button (click)="logout()" mat-button>Logout</button>
+	</mat-toolbar>
+</div>
